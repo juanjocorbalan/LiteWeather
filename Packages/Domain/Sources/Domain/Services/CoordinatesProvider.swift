@@ -15,7 +15,7 @@ public struct RandomCoordinatesProvider: CoordinatesProvider {
     /// Provides coordinates within valid geographic bounds
     ///
     /// - Returns: A Coordinates object with latitude in [-90, 90] and longitude in [-180, 180]
-    public func get() -> Coordinates {
+    public func get() async throws -> Coordinates {
         let latitude = Double.random(in: -90...90)
         let longitude = Double.random(in: -180...180)
 

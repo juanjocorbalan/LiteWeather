@@ -8,16 +8,24 @@ let package = Package(
     products: [
         .library(
             name: "Domain",
-            targets: ["Domain"])
+            targets: ["Domain"]),
+        .library(
+            name: "DomainTestingUtils",
+            targets: ["DomainTestingUtils"]),
     ],
     targets: [
         .target(
             name: "Domain",
         ),
+        .target(
+            name: "DomainTestingUtils",
+            dependencies: ["Domain"],
+        ),
         .testTarget(
             name: "DomainTests",
             dependencies: [
-                "Domain"
+                "Domain",
+                "DomainTestingUtils"
             ]),
     ]
 )
