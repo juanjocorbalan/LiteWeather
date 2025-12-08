@@ -1,11 +1,3 @@
-//
-//  Formatting+extensions.swift
-//  LiteWeather
-//
-//  Created by Juanjo Corbalan on 8/12/25.
-//
-
-
 import Foundation
 import Domain
 
@@ -24,7 +16,7 @@ extension Weather {
     }
     
     /// Formatted wind speed with unit (e.g., "15 km/h" or "9 mph")
-    func speedFormatted(measurementSystem: MeasurementSystem) -> String {
+    func windSpeedFormatted(measurementSystem: MeasurementSystem) -> String {
         let measurement: Measurement<UnitSpeed>
         if measurementSystem == .metric {
             measurement = Measurement(value: windSpeed, unit: .metersPerSecond).converted(to: .kilometersPerHour)
