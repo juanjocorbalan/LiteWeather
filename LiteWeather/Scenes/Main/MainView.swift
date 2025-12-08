@@ -6,20 +6,23 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack(path: $navigator.path) {
-            EmptyView()
+            let viewModel = dependencies.resolve(navigator: navigator, weatherType: .randomLocation)
+            WeatherView(viewModel: viewModel)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
-                            // call action to navigate
+                            viewModel.goToCurrentLocationWeather()
                         } label: {
                             Image(systemName: "location.circle")
                         }
+                        .accessibilityIdentifier(AccessibilityIdentifiers.Actions.currentLocationButton)
                     }
                 }
                 .navigationDestination(for: MainNavigator.Route.self) { route in
                     switch route {
                     case .currentLocationWeather:
-                        EmptyView()
+                        WeatherView(viewModel: dependencies.resolve(navigator: navigator,
+                                                                    weatherType: .currentLocation))
                     }
                 }
         }
