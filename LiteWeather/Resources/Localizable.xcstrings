@@ -1,7 +1,9 @@
 {
   "sourceLanguage" : "es",
   "strings" : {
+    "Running Unit Tests -> No UI needed" : {
 
+    }
   },
   "version" : "1.1"
 }
