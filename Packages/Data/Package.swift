@@ -8,7 +8,10 @@ let package = Package(
     products: [
         .library(
             name: "Data",
-            targets: ["Data"])
+            targets: ["Data"]),
+        .library(
+            name: "DataTestingUtils",
+            targets: ["DataTestingUtils"]),
     ],
     dependencies: [
         .package(name: "Domain", path: "../Domain")
@@ -20,10 +23,21 @@ let package = Package(
                 .product(name: "Domain", package: "Domain")
             ]
         ),
+        .target(
+            name: "DataTestingUtils",
+            dependencies: [
+                .product(name: "Domain", package: "Domain")
+            ],
+            resources: [
+                .process("Resources"),
+            ]
+        ),
         .testTarget(
             name: "DataTests",
             dependencies: [
-                "Data"
+                "Data",
+                "DataTestingUtils",
+                .product(name: "DomainTestingUtils", package: "Domain")
             ]
         ),
     ]
