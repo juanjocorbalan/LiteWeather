@@ -1,0 +1,74 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo azul oscuro -->
+  <rect width="1024" height="1024" fill="#1A2C3D"/>
+  
+  <!-- Sol más grande en la esquina superior izquierda -->
+  <g>
+    <!-- Centro del sol -->
+    <circle cx="350" cy="310" r="140" fill="#FDB930"/>
+    
+    <!-- 8 rayos radiales más largos -->
+    <!-- Norte (0°) -->
+    <rect x="332" y="90" width="36" height="95" rx="18" fill="#FDB930"/>
+    
+    <!-- Noreste (45°) -->
+    <g transform="translate(350, 310) rotate(45) translate(-350, -310)">
+      <rect x="332" y="90" width="36" height="95" rx="18" fill="#FDB930"/>
+    </g>
+    
+    <!-- Este (90°) -->
+    <rect x="475" y="292" width="95" height="36" rx="18" fill="#FDB930"/>
+    
+    <!-- Sureste (135°) -->
+    <g transform="translate(350, 310) rotate(135) translate(-350, -310)">
+      <rect x="332" y="90" width="36" height="95" rx="18" fill="#FDB930"/>
+    </g>
+    
+    <!-- Sur (180°) -->
+    <rect x="332" y="455" width="36" height="95" rx="18" fill="#FDB930"/>
+    
+    <!-- Suroeste (225°) -->
+    <g transform="translate(350, 310) rotate(225) translate(-350, -310)">
+      <rect x="332" y="90" width="36" height="95" rx="18" fill="#FDB930"/>
+    </g>
+    
+    <!-- Oeste (270°) -->
+    <rect x="130" y="292" width="95" height="36" rx="18" fill="#FDB930"/>
+    
+    <!-- Noroeste (315°) -->
+    <g transform="translate(350, 310) rotate(315) translate(-350, -310)">
+      <rect x="332" y="90" width="36" height="95" rx="18" fill="#FDB930"/>
+    </g>
+  </g>
+  
+  <!-- Nube grande centrada -->
+  <defs>
+    <filter id="cloudShadowDark">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dx="0" dy="5" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.15"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <g filter="url(#cloudShadowDark)">
+    <circle cx="420" cy="430" r="145" fill="#E8EDF2"/>
+    <circle cx="580" cy="405" r="170" fill="#E8EDF2"/>
+    <circle cx="740" cy="435" r="145" fill="#E8EDF2"/>
+    <ellipse cx="580" cy="475" rx="210" ry="130" fill="#E8EDF2"/>
+  </g>
+  
+  <!-- Pin de ubicación en naranja (color del modo claro) -->
+  <g filter="url(#cloudShadowDark)">
+    <path d="M 512 560 C 440 560 382 618 382 690 C 382 800 512 950 512 950 C 512 950 642 800 642 690 C 642 618 584 560 512 560 Z" 
+          fill="#FF9500"/>
+    
+    <!-- Círculo interior del pin -->
+    <circle cx="512" cy="690" r="65" fill="#FFFFFF"/>
+  </g>
+</svg>
