@@ -424,7 +424,7 @@
 				DEVELOPMENT_TEAM = 3P3D5394KZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To provide current weather conditions at your location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Para mostrar las condiciones actuales del tiempo en tu ubicación";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -459,7 +459,7 @@
 				DEVELOPMENT_TEAM = 3P3D5394KZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To provide current weather conditions at your location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Para mostrar las condiciones actuales del tiempo en tu ubicación";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
