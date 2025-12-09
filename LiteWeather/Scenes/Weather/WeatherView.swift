@@ -4,6 +4,7 @@ import DomainTestingUtils
 #endif
 
 struct WeatherView: View {
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State var viewModel: WeatherViewModel
 
     var body: some View {
@@ -18,7 +19,7 @@ struct WeatherView: View {
             }
         }
         .background(Color.backgroundPrimary)
-        .animation(.easeInOut(duration: 0.3), value: viewModel.state)
+        .animation(reduceMotion ? nil : .easeInOut(duration: 0.3), value: viewModel.state)
         .navigationTitle(viewModel.title)
         .navigationBarTitleDisplayMode(.inline)
         .refreshable {

@@ -7,6 +7,7 @@ import DomainTestingUtils
 struct WeatherConditionsView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
     @ScaledMetric private var iconHeight: CGFloat = 64
     @ScaledMetric private var tempHeight: CGFloat = 54
     @Bindable var viewModel: WeatherViewModel
@@ -65,14 +66,23 @@ struct WeatherConditionsView: View {
         return LazyVGrid(columns: columns, spacing: 16) {
             VStack(spacing: 0) {
                 // Weather Icon
-                Image(systemName: weather.weatherIcon)
-                    .font(.system(size: iconHeight))
-                    .foregroundStyle(weather.weatherIconColor.gradient)
-                    .symbolRenderingMode(.hierarchical)
-                    .symbolEffect(.bounce, value: weather.currentTemperature)
-                    .frame(height: iconHeight)
-                    .accessibilityLabel(weather.weatherDescription)
-                    .accessibilityIdentifier(AccessibilityIdentifiers.WeatherContent.weatherIcon)
+                Group {
+                    if reduceMotion {
+                        Image(systemName: weather.weatherIcon)
+                            .font(.system(size: iconHeight))
+                            .foregroundStyle(weather.weatherIconColor.gradient)
+                            .symbolRenderingMode(.hierarchical)
+                    } else {
+                        Image(systemName: weather.weatherIcon)
+                            .font(.system(size: iconHeight))
+                            .foregroundStyle(weather.weatherIconColor.gradient)
+                            .symbolRenderingMode(.hierarchical)
+                            .symbolEffect(.bounce, value: weather)
+                    }
+                }
+                .frame(height: iconHeight)
+                .accessibilityLabel(weather.weatherDescription)
+                .accessibilityIdentifier(AccessibilityIdentifiers.WeatherContent.weatherIcon)
                 
                 // Description
                 if !weather.weatherDescription.isEmpty {
@@ -85,13 +95,12 @@ struct WeatherConditionsView: View {
             .accessibilityElement(children: .combine)
             
             VStack(spacing: 0) {
-                // Temperature
                 Text(weather.currentTemperature)
+                    .contentTransition(reduceMotion ? .identity : .numericText())
                     .font(.system(size: tempHeight, weight: .thin))
                     .foregroundStyle(Color.textPrimary)
                     .accessibilityIdentifier(AccessibilityIdentifiers.WeatherContent.currentTemperature)
                 
-                // Feels Like
                 Text(weather.feelsLike)
                     .font(.subheadline)
                     .foregroundStyle(Color.textTertiary)
@@ -174,6 +183,7 @@ struct WeatherConditionsView: View {
                 .accessibilityHidden(true)
             
             Text(value)
+                .contentTransition(reduceMotion ? .identity : .numericText())
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .foregroundStyle(Color.textPrimary)
