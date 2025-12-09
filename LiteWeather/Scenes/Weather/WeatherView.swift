@@ -1,4 +1,7 @@
 import SwiftUI
+#if DEBUG
+import DomainTestingUtils
+#endif
 
 struct WeatherView: View {
     @State var viewModel: WeatherViewModel
@@ -28,3 +31,23 @@ struct WeatherView: View {
         }
     }
 }
+
+#if DEBUG
+#Preview("Success - Madrid") {
+    NavigationStack {
+        WeatherView(viewModel: .previewMadrid)
+    }
+}
+
+#Preview("Error - Unknown") {
+    NavigationStack {
+        WeatherView(viewModel: .previewErrorUnknown)
+    }
+}
+
+#Preview("Error - Unavailable") {
+    NavigationStack {
+        WeatherView(viewModel: .previewErrorUnavailable)
+    }
+}
+#endif

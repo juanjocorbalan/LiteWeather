@@ -1,5 +1,8 @@
 import SwiftUI
 import Domain
+#if DEBUG
+import DomainTestingUtils
+#endif
 
 struct WeatherConditionsView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -181,4 +184,14 @@ struct WeatherConditionsView: View {
         .padding(12)
         .liquidGlassCard(baseColor: Color.surface, cornerRadius: 24)
     }
+}
+
+#Preview("Weather Conditions - Madrid") {
+    let presentationModel = WeatherPresentationModel(weather: .madrid, measurementSystem: .metric)
+    return WeatherConditionsView(viewModel: .previewMadrid, weather: presentationModel)
+}
+
+#Preview("Weather Conditions - Imperial System") {
+    let presentationModel = WeatherPresentationModel(weather: .london, measurementSystem: .imperial)
+    return WeatherConditionsView(viewModel: .previewLondon, weather: presentationModel)
 }

@@ -1,4 +1,8 @@
 import SwiftUI
+import Domain
+#if DEBUG
+import DomainTestingUtils
+#endif
 
 struct ErrorView: View {
     @Bindable var viewModel: WeatherViewModel
@@ -35,4 +39,9 @@ struct ErrorView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
     }
+}
+
+#Preview {
+    ErrorView(viewModel: .previewErrorUnavailable,
+              error: DomainError.unavailable)
 }

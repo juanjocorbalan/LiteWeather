@@ -18,3 +18,7 @@ struct LoadingView: View {
         .accessibilityIdentifier(AccessibilityIdentifiers.WeatherView.loadingView)
     }
 }
+
+#Preview {
+    LoadingView()
+}

@@ -10,6 +10,7 @@
 		DF97B1E62EE781DE006F83DF /* DomainTestingUtils in Frameworks */ = {isa = PBXBuildFile; productRef = DF97B1E52EE781DE006F83DF /* DomainTestingUtils */; };
 		DFEDC1592EE740E800DA9F3D /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = DFEDC1582EE740E800DA9F3D /* Data */; };
 		DFEDC15B2EE740E800DA9F3D /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = DFEDC15A2EE740E800DA9F3D /* Domain */; };
+		DFEEA25B2EE8151000EDDECF /* DomainTestingUtils in Frameworks */ = {isa = PBXBuildFile; productRef = DFEEA25A2EE8151000EDDECF /* DomainTestingUtils */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 			files = (
 				DFEDC15B2EE740E800DA9F3D /* Domain in Frameworks */,
 				DFEDC1592EE740E800DA9F3D /* Data in Frameworks */,
+				DFEEA25B2EE8151000EDDECF /* DomainTestingUtils in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +137,7 @@
 			packageProductDependencies = (
 				DFEDC1582EE740E800DA9F3D /* Data */,
 				DFEDC15A2EE740E800DA9F3D /* Domain */,
+				DFEEA25A2EE8151000EDDECF /* DomainTestingUtils */,
 			);
 			productName = LiteWeather;
 			productReference = DF3F21E72EE73FA9004F3A4D /* LiteWeather.app */;
@@ -448,7 +451,7 @@
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_UPCOMING_FEATURE_NONISOLATED_NONSENDING_BY_DEFAULT = MIGRATE;
+				SWIFT_UPCOMING_FEATURE_NONISOLATED_NONSENDING_BY_DEFAULT = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -484,7 +487,7 @@
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_UPCOMING_FEATURE_NONISOLATED_NONSENDING_BY_DEFAULT = MIGRATE;
+				SWIFT_UPCOMING_FEATURE_NONISOLATED_NONSENDING_BY_DEFAULT = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -638,6 +641,10 @@
 		DFEDC15A2EE740E800DA9F3D /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Domain;
+		};
+		DFEEA25A2EE8151000EDDECF /* DomainTestingUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DomainTestingUtils;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

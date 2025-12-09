@@ -1,4 +1,7 @@
 import SwiftUI
+#if DEBUG
+import DomainTestingUtils
+#endif
 
 struct NewLocationButtonView: View {
     @Bindable var viewModel: WeatherViewModel
@@ -21,4 +24,12 @@ struct NewLocationButtonView: View {
         .accessibilityAddTraits(.isButton)
         .accessibilityIdentifier(AccessibilityIdentifiers.Actions.reloadButton)
     }
+}
+
+#Preview("Refresh Button") {
+    VStack {
+        NewLocationButtonView(viewModel: .previewMadrid)
+            .padding()
+    }
+    .background(Color.backgroundPrimary)
 }
