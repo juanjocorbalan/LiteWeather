@@ -57,7 +57,7 @@ final class WeatherViewModel {
         state = .loaded(presentationModel)
     }
 
-    nonisolated private func getSimpleWeather() async throws(DomainError) -> Weather {
+    @concurrent private func getSimpleWeather() async throws(DomainError) -> Weather {
         try await getWeatherUseCase.execute()
     }
 
