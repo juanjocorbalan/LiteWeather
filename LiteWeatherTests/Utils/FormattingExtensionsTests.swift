@@ -5,7 +5,6 @@ import Domain
 import DomainTestingUtils
 @testable import LiteWeather
 
-@MainActor
 struct FormattingExtensionsTests {
 
     // MARK: - Coordinates Formatting Tests

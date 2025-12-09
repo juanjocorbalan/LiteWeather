@@ -4,12 +4,9 @@ import Domain
 
 /// Helper for UI Testing scenarios
 ///
-/// This enum is used **ONLY for UI tests** to configure the app behavior via launch arguments.
+/// This enum is used for UI tests to configure the app behavior via launch arguments.
 /// It is integrated with `DependencyContainer` to inject mocks during UI testing.
 ///
-/// ```swift
-/// app.launchArguments = ["--uitesting", "--scenario=success-madrid"]
-/// ```
 enum UITestingHelper {
     /// Testing scenarios
     enum Scenario: String {

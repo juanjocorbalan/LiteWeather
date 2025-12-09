@@ -1,7 +1,6 @@
 import SwiftUI
-import Data
-import Domain
 #if DEBUG
+import Data
 import DomainTestingUtils
 #endif
 
@@ -187,6 +186,7 @@ struct WeatherConditionsView: View {
     }
 }
 
+#if DEBUG
 #Preview("Weather Conditions - Madrid") {
     let presentationModel = WeatherPresentationModel(weather: .madrid, measurementSystem: .metric)
     return WeatherConditionsView(viewModel: .previewMadrid, weather: presentationModel)
@@ -196,3 +196,4 @@ struct WeatherConditionsView: View {
     let presentationModel = WeatherPresentationModel(weather: .london, measurementSystem: .imperial)
     return WeatherConditionsView(viewModel: .previewLondon, weather: presentationModel)
 }
+#endif

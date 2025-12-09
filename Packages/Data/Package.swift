@@ -26,6 +26,7 @@ let package = Package(
         .target(
             name: "DataTestingUtils",
             dependencies: [
+                "Data",
                 .product(name: "Domain", package: "Domain")
             ],
             resources: [

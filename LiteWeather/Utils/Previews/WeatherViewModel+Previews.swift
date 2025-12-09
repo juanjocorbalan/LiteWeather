@@ -1,13 +1,11 @@
 #if DEBUG
-import Foundation
-import Domain
 import DataTestingUtils
 import DomainTestingUtils
 
 // MARK: - Preview Helpers
 
 extension WeatherViewModel {
-    /// Creates a WeatherViewModel for SwiftUI previews with Madrid weather
+    /// Creates a WeatherViewModel for SwiftUI previews (with Madrid weather by default)
     static func preview(
         weatherType: WeatherType = .randomLocation,
         useCase: MockGetWeatherAtLocationUseCase = .madrid(),

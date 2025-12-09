@@ -1,6 +1,6 @@
 import SwiftUI
-import Domain
 #if DEBUG
+import Domain
 import DomainTestingUtils
 #endif
 
@@ -41,7 +41,9 @@ struct ErrorView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     ErrorView(viewModel: .previewErrorUnavailable,
               error: DomainError.unavailable)
 }
+#endif

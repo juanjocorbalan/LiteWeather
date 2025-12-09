@@ -22,7 +22,7 @@ enum WeatherViewState: Equatable {
     }
 }
 
-@Observable @MainActor
+@Observable
 final class WeatherViewModel {
     private let getWeatherUseCase: GetWeatherAtLocationUseCase
     private let localeProvider: LocaleProvider
@@ -31,8 +31,8 @@ final class WeatherViewModel {
     // MARK: - Outputs
 
     private(set) var title: String
-    private(set) var state: WeatherViewState = .loading
     private(set) var isReloading: Bool = false
+    private(set) var state: WeatherViewState = .loading
 
     // MARK: - Init
 
@@ -56,6 +56,10 @@ final class WeatherViewModel {
             measurementSystem: localeProvider.measurementSystem
         )
         state = .loaded(presentationModel)
+    }
+
+    private func handleError(_ error: DomainError) {
+        state = .error(error)
     }
 
     @concurrent private func getSimpleWeather() async throws(DomainError) -> Weather {
@@ -83,11 +87,5 @@ final class WeatherViewModel {
     
     func goToCurrentLocationWeather() {
         navigator.navigateToCurrentWeather()
-    }
-
-    // MARK: - Error Handling
-
-    private func handleError(_ error: DomainError) {
-        state = .error(error)
     }
 }

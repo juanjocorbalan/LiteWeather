@@ -1,9 +1,7 @@
 import Foundation
 
-// MARK: - Base Navigator
-
 /// Type-safe navigation container using SwiftUI's NavigationStack
-@MainActor @Observable
+@Observable
 class Navigator<Route: Hashable> {
     var path: [Route] = []
 
@@ -22,8 +20,6 @@ class Navigator<Route: Hashable> {
         path.removeAll()
     }
 }
-
-// MARK: - Main Navigator
 
 /// Primary app navigation
 @Observable

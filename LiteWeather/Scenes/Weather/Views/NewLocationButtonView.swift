@@ -26,10 +26,9 @@ struct NewLocationButtonView: View {
     }
 }
 
+#if DEBUG
 #Preview("Refresh Button") {
-    VStack {
-        NewLocationButtonView(viewModel: .previewMadrid)
-            .padding()
-    }
-    .background(Color.backgroundPrimary)
+    NewLocationButtonView(viewModel: .previewMadrid)
+        .padding()
 }
+#endif

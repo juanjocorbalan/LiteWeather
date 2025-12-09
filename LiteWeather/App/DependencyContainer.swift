@@ -1,7 +1,6 @@
 import Foundation
 import Data
 import Domain
-import SwiftData
 #if DEBUG
 import DataTestingUtils
 import DomainTestingUtils
@@ -17,15 +16,15 @@ final class DependencyContainer {
     let localeProvider: LocaleProvider
     let randomCoordinatesProvider: CoordinatesProvider
     let userLocationProvider: CoordinatesProvider
+    let isRunningUnitTests: Bool
 
     #if DEBUG
-    let isRunningUnitTests: Bool
     let isUITesting: Bool
     #endif
 
     init() {
-        #if DEBUG
         self.isRunningUnitTests = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+        #if DEBUG
         self.isUITesting = UITestingHelper.isUITesting
         #endif
 
@@ -41,7 +40,6 @@ final class DependencyContainer {
         self.userLocationProvider = CLLocationProvider()
     }
 
-    @MainActor
     func resolve(navigator: MainNavigator, weatherType: WeatherType) -> WeatherViewModel {
         #if DEBUG
         if isUITesting {

@@ -4,7 +4,7 @@ struct LoadingView: View {
     var body: some View {
         VStack(spacing: 16) {
             ProgressView()
-                .controlSize(.large)
+                .controlSize(.extraLarge)
                 .tint(Color.textPrimary)
 
             Text(String(localized: "loading_weather"))
