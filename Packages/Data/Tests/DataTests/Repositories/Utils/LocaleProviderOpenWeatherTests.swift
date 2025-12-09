@@ -1,5 +1,5 @@
 import Testing
-import DomainTestingUtils
+import DataTestingUtils
 @testable import Data
 
 @Suite("LocaleProvider OpenWeather Extension Tests", .serialized)

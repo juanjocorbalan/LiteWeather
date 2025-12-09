@@ -1,18 +1,28 @@
 import Foundation
+import Data
 import Domain
+
+// MARK: - Date Formatting Helpers
+
+/// Formats a date with date and time components
+private func formatDateTime(_ date: Date) -> String {
+    let style = Date.FormatStyle(date: .abbreviated, time: .shortened)
+    return date.formatted(style)
+}
+
+/// Formats a date as time only (HH:mm) in the specified timezone
+private func formatTime(_ date: Date, in timeZone: TimeZone) -> String {
+    var style = Date.FormatStyle()
+    style.timeZone = timeZone
+    return date.formatted(style.hour(.twoDigits(amPM: .omitted)).minute(.twoDigits))
+}
 
 // MARK: - Coordinates Formatting
 
 extension Weather {
-    /// Helper to format time in location's timezone
-    private func formatTime(_ date: Date) -> String {
-        let style = Date.FormatStyle(date: .abbreviated, time: .shortened)
-        return date.formatted(style)
-    }
-
     /// Formatted timestamp
     var timestampFormatted: String {
-        formatTime(timestamp)
+        formatDateTime(timestamp)
     }
     
     /// Formatted wind speed with unit (e.g., "15 km/h" or "9 mph")
@@ -56,21 +66,14 @@ extension Location {
         TimeZone(secondsFromGMT: timezoneOffset) ?? .current
     }
 
-    /// Helper to format time in location's timezone
-    private func formatTime(_ date: Date) -> String {
-        var style = Date.FormatStyle()
-        style.timeZone = timeZone
-        return date.formatted(style.hour(.twoDigits(amPM: .omitted)).minute(.twoDigits))
-    }
-
     /// Formatted sunrise time in the location's timezone (e.g., "06:45")
     var sunriseFormatted: String {
-        formatTime(sunrise)
+        formatTime(sunrise, in: timeZone)
     }
 
     /// Formatted sunset time in the location's timezone (e.g., "18:30")
     var sunsetFormatted: String {
-        formatTime(sunset)
+        formatTime(sunset, in: timeZone)
     }
 }
 

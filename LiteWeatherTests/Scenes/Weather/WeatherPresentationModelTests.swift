@@ -1,6 +1,7 @@
 import Testing
 import Foundation
 import SwiftUI
+import Data
 import Domain
 import DomainTestingUtils
 @testable import LiteWeather

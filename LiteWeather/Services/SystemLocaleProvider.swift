@@ -1,5 +1,5 @@
 import Foundation
-import Domain
+import Data
 
 /// Provides locale configuration based on the system's current locale
 final class SystemLocaleProvider: LocaleProvider {

@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import Data
 import Domain
 
 enum WeatherViewState: Equatable {

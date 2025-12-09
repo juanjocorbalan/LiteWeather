@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import Data
 import Domain
 
 /// Presentation model containing pre-formatted weather data ready for display

@@ -11,6 +11,7 @@
 		DFEDC1592EE740E800DA9F3D /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = DFEDC1582EE740E800DA9F3D /* Data */; };
 		DFEDC15B2EE740E800DA9F3D /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = DFEDC15A2EE740E800DA9F3D /* Domain */; };
 		DFEEA25B2EE8151000EDDECF /* DomainTestingUtils in Frameworks */ = {isa = PBXBuildFile; productRef = DFEEA25A2EE8151000EDDECF /* DomainTestingUtils */; };
+		DFEEA25F2EE86C3F00EDDECF /* DataTestingUtils in Frameworks */ = {isa = PBXBuildFile; productRef = DFEEA25E2EE86C3F00EDDECF /* DataTestingUtils */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFEDC15B2EE740E800DA9F3D /* Domain in Frameworks */,
+				DFEEA25F2EE86C3F00EDDECF /* DataTestingUtils in Frameworks */,
 				DFEDC1592EE740E800DA9F3D /* Data in Frameworks */,
 				DFEEA25B2EE8151000EDDECF /* DomainTestingUtils in Frameworks */,
 			);
@@ -138,6 +140,7 @@
 				DFEDC1582EE740E800DA9F3D /* Data */,
 				DFEDC15A2EE740E800DA9F3D /* Domain */,
 				DFEEA25A2EE8151000EDDECF /* DomainTestingUtils */,
+				DFEEA25E2EE86C3F00EDDECF /* DataTestingUtils */,
 			);
 			productName = LiteWeather;
 			productReference = DF3F21E72EE73FA9004F3A4D /* LiteWeather.app */;
@@ -645,6 +648,10 @@
 		DFEEA25A2EE8151000EDDECF /* DomainTestingUtils */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DomainTestingUtils;
+		};
+		DFEEA25E2EE86C3F00EDDECF /* DataTestingUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DataTestingUtils;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -3,6 +3,7 @@ import Data
 import Domain
 import SwiftData
 #if DEBUG
+import DataTestingUtils
 import DomainTestingUtils
 #endif
 

@@ -1,4 +1,5 @@
-import Domain
+import Foundation
+import Data
 
 public final class MockLocaleProvider: LocaleProvider, @unchecked Sendable {
     public let measurementSystem: MeasurementSystem
