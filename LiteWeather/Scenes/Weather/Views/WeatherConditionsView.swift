@@ -10,25 +10,26 @@ struct WeatherConditionsView: View {
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @ScaledMetric private var iconHeight: CGFloat = 64
     @ScaledMetric private var tempHeight: CGFloat = 54
-    @Bindable var viewModel: WeatherViewModel
     let weather: WeatherPresentationModel
-    
+    let isReloading: Bool
+    var onRefresh: (() async -> Void)? = nil
+
     private var isWideScreen: Bool {
         verticalSizeClass == .compact || horizontalSizeClass == .regular
     }
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 locationHeader(weather)
                 mainWeatherSection(weather)
                 weatherDetailsGrid(weather)
-                NewLocationButtonView(viewModel: viewModel)
+                NewLocationButtonView(onRefresh: onRefresh)
             }
             .padding()
         }
         .overlay {
-            if viewModel.isReloading {
+            if isReloading {
                 Color.backgroundPrimary.opacity(0.7)
                     .overlay {
                         LoadingView()
@@ -199,11 +200,17 @@ struct WeatherConditionsView: View {
 #if DEBUG
 #Preview("Weather Conditions - Madrid") {
     let presentationModel = WeatherPresentationModel(weather: .madrid, measurementSystem: .metric)
-    return WeatherConditionsView(viewModel: .previewMadrid, weather: presentationModel)
+    return WeatherConditionsView(
+        weather: presentationModel,
+        isReloading: false
+    )
 }
 
 #Preview("Weather Conditions - Imperial System") {
     let presentationModel = WeatherPresentationModel(weather: .london, measurementSystem: .imperial)
-    return WeatherConditionsView(viewModel: .previewLondon, weather: presentationModel)
+    return WeatherConditionsView(
+        weather: presentationModel,
+        isReloading: false
+    )
 }
 #endif

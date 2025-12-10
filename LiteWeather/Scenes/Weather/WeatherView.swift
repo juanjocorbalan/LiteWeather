@@ -13,9 +13,16 @@ struct WeatherView: View {
             case .loading:
                 LoadingView()
             case .loaded(let presentationModel):
-                WeatherConditionsView(viewModel: viewModel, weather: presentationModel)
+                WeatherConditionsView(
+                    weather: presentationModel,
+                    isReloading: viewModel.isReloading,
+                    onRefresh: { await viewModel.reload() }
+                )
             case .error(let error):
-                ErrorView(viewModel: viewModel, error: error)
+                ErrorView(
+                    error: error,
+                    onRetry: { await viewModel.reload() }
+                )
             }
         }
         .background(Color.backgroundPrimary)

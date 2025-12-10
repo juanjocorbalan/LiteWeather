@@ -4,12 +4,12 @@ import DomainTestingUtils
 #endif
 
 struct NewLocationButtonView: View {
-    @Bindable var viewModel: WeatherViewModel
+    var onRefresh: (() async -> Void)? = nil
 
     var body: some View {
         Button {
             Task {
-                await viewModel.reload()
+                await onRefresh?()
             }
         } label: {
             Label(String(localized: "refresh"), systemImage: "arrow.triangle.2.circlepath")
@@ -28,7 +28,7 @@ struct NewLocationButtonView: View {
 
 #if DEBUG
 #Preview("Refresh Button") {
-    NewLocationButtonView(viewModel: .previewMadrid)
+    NewLocationButtonView()
         .padding()
 }
 #endif

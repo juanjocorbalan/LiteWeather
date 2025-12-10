@@ -5,8 +5,8 @@ import DomainTestingUtils
 #endif
 
 struct ErrorView: View {
-    @Bindable var viewModel: WeatherViewModel
     let error: LocalizedError
+    var onRetry: (() async -> Void)? = nil
 
     var body: some View {
         VStack(spacing: 32) {
@@ -34,7 +34,7 @@ struct ErrorView: View {
 
             Spacer()
 
-            NewLocationButtonView(viewModel: viewModel)
+            NewLocationButtonView(onRefresh: onRetry)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
@@ -43,7 +43,6 @@ struct ErrorView: View {
 
 #if DEBUG
 #Preview {
-    ErrorView(viewModel: .previewErrorUnavailable,
-              error: DomainError.unavailable)
+    ErrorView(error: DomainError.unavailable)
 }
 #endif
