@@ -16,16 +16,18 @@ final class DependencyContainer {
     let localeProvider: LocaleProvider
     let randomCoordinatesProvider: CoordinatesProvider
     let userLocationProvider: CoordinatesProvider
-    let isRunningUnitTests: Bool
+    let shouldSkipUI: Bool
 
     #if DEBUG
-    let isUITesting: Bool
+    private let isUITesting: Bool
     #endif
 
     init() {
-        self.isRunningUnitTests = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
         #if DEBUG
+        self.shouldSkipUI = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
         self.isUITesting = UITestingHelper.isUITesting
+        #else
+        self.shouldSkipUI = false
         #endif
 
         self.apiClient = URLSessionAPIClient(
@@ -53,7 +55,7 @@ final class DependencyContainer {
             )
         }
         #endif
-
+        
         return WeatherViewModel(
             weatherType: weatherType,
             getWeatherUseCase: resolve(weatherType: weatherType),
@@ -61,8 +63,26 @@ final class DependencyContainer {
             navigator: navigator
         )
     }
+    
+    func resolve() -> WeatherRepository {
+        WeatherRepositoryImpl(apiClient: apiClient, localeProvider: localeProvider)
+    }
+    
+    func resolve() -> GetCurrentWeatherUseCase {
+        GetCurrentWeatherUseCaseImpl(weatherRepository: resolve())
+    }
+    
+    func resolve(weatherType: WeatherType) -> GetWeatherAtLocationUseCase {
+        let coordinatesProvider = weatherType == .currentLocation
+        ? userLocationProvider
+        : randomCoordinatesProvider
+        return GetWeatherAtLocationUseCaseImpl(coordinatesProvider: coordinatesProvider,
+                                               getCurrentWeather: resolve())
+    }
+}
 
-    #if DEBUG
+#if DEBUG
+extension DependencyContainer {
     private func resolve(for scenario: UITestingHelper.Scenario,
                          delay: UInt64?) -> MockGetWeatherAtLocationUseCase {
         switch scenario {
@@ -82,21 +102,5 @@ final class DependencyContainer {
             return .errorInvalidData(delay: delay)
         }
     }
-    #endif
-
-    func resolve() -> WeatherRepository {
-        WeatherRepositoryImpl(apiClient: apiClient, localeProvider: localeProvider)
-    }
-
-    func resolve() -> GetCurrentWeatherUseCase {
-        GetCurrentWeatherUseCaseImpl(weatherRepository: resolve())
-    }
-
-    func resolve(weatherType: WeatherType) -> GetWeatherAtLocationUseCase {
-        let coordinatesProvider = weatherType == .currentLocation
-        ? userLocationProvider
-        : randomCoordinatesProvider
-        return GetWeatherAtLocationUseCaseImpl(coordinatesProvider: coordinatesProvider,
-                                               getCurrentWeather: resolve())
-    }
 }
+#endif

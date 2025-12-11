@@ -7,8 +7,8 @@ struct LiteWeatherApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if dependencies.isRunningUnitTests {
-                Text("Running Unit Tests -> No UI needed")
+            if dependencies.shouldSkipUI {
+                Text("Running Tests -> No UI needed")
             } else {
                 MainView(dependencies: dependencies, navigator: navigator)
             }

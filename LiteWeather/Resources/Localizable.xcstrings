@@ -211,12 +211,18 @@
         }
       }
     },
-    "Running Unit Tests -> No UI needed" : {
+    "Running Tests -> No UI needed" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Running Unit Tests -> No UI needed"
+            "value" : "Running Tests -> No UI needed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ejecutando Tests -> No se requiere UI"
           }
         }
       }
