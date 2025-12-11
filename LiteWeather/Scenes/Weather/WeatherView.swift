@@ -29,9 +29,6 @@ struct WeatherView: View {
         .animation(reduceMotion ? nil : .easeInOut(duration: 0.3), value: viewModel.state)
         .navigationTitle(viewModel.title)
         .navigationBarTitleDisplayMode(.inline)
-        .refreshable {
-            await viewModel.reload()
-        }
         .task {
             if case .loading = viewModel.state {
                 await viewModel.reload()

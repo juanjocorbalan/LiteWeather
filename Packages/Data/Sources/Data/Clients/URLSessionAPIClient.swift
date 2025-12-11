@@ -8,7 +8,7 @@ public final class URLSessionAPIClient: APIClient {
 
     public init(
         configuration: URLSessionConfiguration = .default,
-        cachePolicy: NSURLRequest.CachePolicy = .reloadIgnoringLocalCacheData,
+        cachePolicy: NSURLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData,
         timeoutInterval: TimeInterval = 30,
         retryPolicy: RetryPolicy = .default
     ) {
