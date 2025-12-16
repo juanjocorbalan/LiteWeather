@@ -3,6 +3,15 @@ import Observation
 import Data
 import Domain
 
+// MARK: - Event Handler Protocol
+
+/// Protocol for handling weather-related navigation events.
+protocol WeatherEventHandler: AnyObject {
+    func navigateToCurrentLocationWeather()
+}
+
+// MARK: - View State
+
 enum WeatherViewState: Equatable {
     case loading
     case loaded(WeatherPresentationModel)
@@ -26,7 +35,7 @@ enum WeatherViewState: Equatable {
 final class WeatherViewModel {
     private let getWeatherUseCase: GetWeatherAtLocationUseCase
     private let localeProvider: LocaleProvider
-    private let navigator: MainNavigator
+    private let eventHandler: WeatherEventHandler
 
     // MARK: - Outputs
 
@@ -40,12 +49,12 @@ final class WeatherViewModel {
         weatherType: WeatherType,
         getWeatherUseCase: GetWeatherAtLocationUseCase,
         localeProvider: LocaleProvider,
-        navigator: MainNavigator
+        eventHandler: WeatherEventHandler
     ) {
         self.title = String(localized: weatherType == .randomLocation ? "app_title" : "weather_at_location_title")
         self.getWeatherUseCase = getWeatherUseCase
-        self.navigator = navigator
         self.localeProvider = localeProvider
+        self.eventHandler = eventHandler
     }
 
     // MARK: - Private utils
@@ -84,8 +93,8 @@ final class WeatherViewModel {
 
         isReloading = false
     }
-    
-    func goToCurrentLocationWeather() {
-        navigator.navigateToCurrentWeather()
+
+    func currentLocationWeatherRequested() {
+        eventHandler.navigateToCurrentLocationWeather()
     }
 }

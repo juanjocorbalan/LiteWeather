@@ -10,13 +10,13 @@ extension WeatherViewModel {
         weatherType: WeatherType = .randomLocation,
         useCase: MockGetWeatherAtLocationUseCase = .madrid(),
         locale: MockLocaleProvider = MockLocaleProvider(),
-        navigator: MainNavigator = MainNavigator()
+        eventHandler: WeatherEventHandler = MainNavigator()
     ) -> WeatherViewModel {
         WeatherViewModel(
             weatherType: weatherType,
             getWeatherUseCase: useCase,
             localeProvider: locale,
-            navigator: navigator
+            eventHandler: eventHandler
         )
     }
 }

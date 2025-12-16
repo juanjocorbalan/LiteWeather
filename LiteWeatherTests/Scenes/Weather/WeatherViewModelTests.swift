@@ -12,10 +12,12 @@ class WeatherViewModelTests {
     private let mockLocaleProvider = MockLocaleProvider()
 
     private func createViewModel(weatherType: WeatherType = .randomLocation) -> WeatherViewModel {
-        return WeatherViewModel(weatherType: weatherType,
-                                getWeatherUseCase: mockGetWeatherAtLocationUseCase,
-                                localeProvider: mockLocaleProvider,
-                                navigator: mockNavigator)
+        WeatherViewModel(
+            weatherType: weatherType,
+            getWeatherUseCase: mockGetWeatherAtLocationUseCase,
+            localeProvider: mockLocaleProvider,
+            eventHandler: mockNavigator
+        )
     }
 
     // MARK: - Initial State Tests
@@ -115,7 +117,7 @@ class WeatherViewModelTests {
             weatherType: .randomLocation,
             getWeatherUseCase: mockGetWeatherAtLocationUseCase,
             localeProvider: imperialLocaleProvider,
-            navigator: mockNavigator
+            eventHandler: mockNavigator
         )
         mockGetWeatherAtLocationUseCase.stubbedResult = .success(Weather.london)
 
@@ -172,7 +174,7 @@ class WeatherViewModelTests {
     @Test func goToCurrentLocationWeather_addsRouteToNavigator() {
         let viewModel = createViewModel()
 
-        viewModel.goToCurrentLocationWeather()
+        viewModel.currentLocationWeatherRequested()
 
         #expect(mockNavigator.path.count == 1)
         #expect(mockNavigator.path.first == .currentLocationWeather)
@@ -185,7 +187,7 @@ class WeatherViewModelTests {
 
         let stateBefore = viewModel.state
 
-        viewModel.goToCurrentLocationWeather()
+        viewModel.currentLocationWeatherRequested()
 
         #expect(viewModel.state == stateBefore)
     }

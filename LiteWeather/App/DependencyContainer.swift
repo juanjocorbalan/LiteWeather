@@ -42,7 +42,7 @@ final class DependencyContainer {
         self.userLocationProvider = CLLocationProvider()
     }
 
-    func resolve(navigator: MainNavigator, weatherType: WeatherType) -> WeatherViewModel {
+    func resolveWeatherViewModel(weatherType: WeatherType, eventHandler: WeatherEventHandler) -> WeatherViewModel {
         #if DEBUG
         if isUITesting {
             let scenario = UITestingHelper.currentScenario ?? .successMadrid
@@ -51,16 +51,16 @@ final class DependencyContainer {
                 weatherType: weatherType,
                 getWeatherUseCase: resolve(for: scenario, delay: delay),
                 localeProvider: MockLocaleProvider(),
-                navigator: navigator
+                eventHandler: eventHandler
             )
         }
         #endif
-        
+
         return WeatherViewModel(
             weatherType: weatherType,
-            getWeatherUseCase: resolve(weatherType: weatherType),
+            getWeatherUseCase: resolveWeatherUseCase(weatherType: weatherType),
             localeProvider: localeProvider,
-            navigator: navigator
+            eventHandler: eventHandler
         )
     }
     
@@ -72,7 +72,7 @@ final class DependencyContainer {
         GetCurrentWeatherUseCaseImpl(weatherRepository: resolve())
     }
     
-    func resolve(weatherType: WeatherType) -> GetWeatherAtLocationUseCase {
+    func resolveWeatherUseCase(weatherType: WeatherType) -> GetWeatherAtLocationUseCase {
         let coordinatesProvider = weatherType == .currentLocation
         ? userLocationProvider
         : randomCoordinatesProvider
