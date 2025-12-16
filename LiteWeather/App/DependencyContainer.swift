@@ -1,4 +1,5 @@
 import Foundation
+import SwiftData
 import Data
 import Domain
 #if DEBUG
@@ -12,15 +13,15 @@ enum WeatherType {
 }
 
 final class DependencyContainer {
-    let apiClient: APIClient
-    let localeProvider: LocaleProvider
-    let randomCoordinatesProvider: CoordinatesProvider
-    let userLocationProvider: CoordinatesProvider
-    let shouldSkipUI: Bool
-
-    #if DEBUG
+    private let modelContainer: ModelContainer
+    private let persistenceClient: any PersistenceClient<Weather, WeatherQueryBuilder>
+    private let apiClient: APIClient
+    private let localeProvider: LocaleProvider
+    private let randomCoordinatesProvider: CoordinatesProvider
+    private let userLocationProvider: CoordinatesProvider
     private let isUITesting: Bool
-    #endif
+
+    let shouldSkipUI: Bool
 
     init() {
         #if DEBUG
@@ -28,15 +29,25 @@ final class DependencyContainer {
         self.isUITesting = UITestingHelper.isUITesting
         #else
         self.shouldSkipUI = false
+        self.isUITesting = false
         #endif
 
         self.apiClient = URLSessionAPIClient(
             configuration: .default,
-            cachePolicy: .reloadIgnoringLocalCacheData,
+            cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
             timeoutInterval: 30,
             retryPolicy: .default
         )
 
+        let schema = Schema([WeatherCacheModel.self, WeatherConditionModel.self])
+        let config = ModelConfiguration(isStoredInMemoryOnly: self.shouldSkipUI || self.isUITesting)
+        do {
+            self.modelContainer = try ModelContainer(for: schema, configurations: [config])
+        } catch {
+            fatalError("Failed to create ModelContainer: \(error)")
+        }
+
+        self.persistenceClient = SwiftDataPersistenceClient(modelContainer: modelContainer)
         self.localeProvider = SystemLocaleProvider()
         self.randomCoordinatesProvider = RandomCoordinatesProvider()
         self.userLocationProvider = CLLocationProvider()
