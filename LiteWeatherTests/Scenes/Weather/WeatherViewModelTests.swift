@@ -6,7 +6,8 @@ import DataTestingUtils
 import DomainTestingUtils
 @testable import LiteWeather
 
-class WeatherViewModelTests {
+@MainActor
+struct WeatherViewModelTests {
     private let mockGetWeatherAtLocationUseCase = MockGetWeatherAtLocationUseCase()
     private let mockNavigator = MainNavigator()
     private let mockLocaleProvider = MockLocaleProvider()

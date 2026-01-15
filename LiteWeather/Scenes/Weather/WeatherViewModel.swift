@@ -31,7 +31,7 @@ enum WeatherViewState: Equatable {
     }
 }
 
-@Observable
+@MainActor @Observable
 final class WeatherViewModel {
     private let getWeatherUseCase: GetWeatherAtLocationUseCase
     private let localeProvider: LocaleProvider

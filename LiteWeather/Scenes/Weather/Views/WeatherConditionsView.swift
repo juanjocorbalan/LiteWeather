@@ -26,6 +26,15 @@ struct WeatherConditionsView: View {
                 weatherDetailsGrid(weather)
                 NewLocationButtonView(onRefresh: onRefresh)
             }
+            .transform { view in
+                if #available(iOS 26.0, *) {
+                    GlassEffectContainer {
+                        view
+                    }
+                } else {
+                    view
+                }
+            }
             .padding()
         }
         .overlay {
@@ -214,3 +223,9 @@ struct WeatherConditionsView: View {
     )
 }
 #endif
+
+extension View {
+    func transform(@ViewBuilder content: (_ view: Self) -> some View) -> some View {
+        content(self)
+    }
+}

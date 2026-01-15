@@ -12,6 +12,7 @@ enum WeatherType {
     case randomLocation
 }
 
+@MainActor
 final class DependencyContainer {
     private let modelContainer: ModelContainer
     private let persistenceClient: any PersistenceClient<Weather, WeatherQueryBuilder>
