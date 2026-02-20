@@ -39,7 +39,7 @@ public final class CachedWeatherRepository: WeatherRepository {
     private func getCacheFirstWeather(latitude: Double, longitude: Double) async throws(DomainError) -> Weather {
         let filter = WeatherFilter.byId(Weather.idFor(latitude: latitude, longitude: longitude))
         if let cached = try? await persistenceClient.fetch(byFilter: filter).first {
-            Task.detached { [weak self] in
+            Task { [weak self] in
                 try? await self?.fetchAndCache(latitude: latitude, longitude: longitude)
             }
             return cached

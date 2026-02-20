@@ -5,7 +5,11 @@ import DomainTestingUtils
 
 struct WeatherView: View {
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State var viewModel: WeatherViewModel
+    @State private var viewModel: WeatherViewModel
+
+    init(viewModel: WeatherViewModel) {
+        self._viewModel = State(initialValue: viewModel)
+    }
 
     var body: some View {
         Group {

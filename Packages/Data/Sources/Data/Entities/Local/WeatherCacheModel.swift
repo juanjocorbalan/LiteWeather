@@ -48,6 +48,7 @@ public final class WeatherConditionModel {
     public var weatherType: String
     public var timeOfDay: String
     public var conditionDescription: String
+    @Relationship(inverse: \WeatherCacheModel.conditions) public var weather: WeatherCacheModel?
 
     public init(from condition: WeatherCondition) {
         self.weatherType = condition.type.rawValue
